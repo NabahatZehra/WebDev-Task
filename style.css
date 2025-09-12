@@ -1,0 +1,416 @@
+/* Reset */
+* {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #0f1111;
+    color: white; 
+}
+
+/* Navbar */
+.navbar {
+    height: 130px;
+    background-color: transparent;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 2px dotted #fff;
+    margin-bottom: 20px;
+}
+
+.nav-logo {
+    height: 120px;
+    width: 120px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.navbar a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.navbar a:hover, 
+.navbar a.active {
+    font-weight: 700;
+    color: #f9a825; 
+}
+
+/* Main */
+.mainBox {
+    margin: 0;
+    padding: 0;
+}
+
+/* Box1 */
+.box1 {
+    background-color: lightblue;
+    height: 400px;
+}
+
+/* Box2 */
+.box2 {
+    height: 400px;
+    background-color: white;
+    margin: 2px;
+    padding: 2px;
+    border-top: 4px solid #f1b350;
+    text-align: center;
+}
+
+.box2 h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.box2 h2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 8px;
+    background: url("home_record_dots.png") repeat-x center;
+    background-size: contain;
+}
+
+.box2_card {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.card {
+    flex: 1 1 200px;
+    max-width: 220px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: transparent;
+    transition: transform 0.3s;
+}
+
+.card img {
+    width: 50px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #000;
+    font-weight: 700;
+}
+
+.card p {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Box3 */
+.box3 {
+    position: relative;
+    padding: 50px 20px;
+    height: auto; 
+    overflow: hidden; 
+}
+
+.box3_background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("home_records_gallery6-300x300.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left;
+    transform: scaleX(-1); 
+    filter: blur(5px);
+    z-index: -1; 
+}
+
+.box3-container {
+    display: flex;        
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    gap: 40px;
+}
+
+.gallery {
+    display: grid;
+    flex: 0 0 55%;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    width: 55%;
+    order: 1;
+}
+
+.item {
+    overflow: hidden;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.item:hover img {
+    transform: scale(1.1); 
+}
+
+.prepare {
+    flex: 0 0 40%;   
+    order: 2;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.prepare h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.prepare ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    columns: 2; 
+    column-gap: 30px;
+}
+
+.prepare ul li {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 25px;
+    break-inside: avoid;
+}
+
+.prepare ul li::before {
+    content: "✔";
+    position: absolute;
+    left: 0;
+    color: #f9a825; 
+    font-weight: bold;
+}
+
+/* Box4 */
+.box4 {
+    text-align: center;
+    background: #fff;
+    border-top: 4px solid #f1b350;
+    border-bottom: 4px solid #f1b350;
+}
+
+.box4 h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #000;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 15px;  
+}
+
+.box4 h2::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 8px;
+    background: url("home_record_dots.png") repeat-x center;
+    background-size: contain;
+}
+
+.box4-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    margin: 0 auto 40px auto;
+    max-width: 1100px;
+}
+
+.box4-card {
+    color: #fff;
+    border-radius: 4px; 
+    display: flex;
+    flex-direction: column; 
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.box4-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.box4-info {
+    background: #111;
+    width: 100%;
+    border-top: 2px solid #f9a825;
+    padding: 15px;        
+    text-align: center;
+}
+
+.box4-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 15px 0 5px;
+}
+
+.box4-card p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* See More */
+.see-more img {
+    width: 160px;       
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.see-more img:hover {
+    transform: scale(1.05); 
+}
+
+/* Box5 */
+.box5 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f5f5d6;
+    border-top: 2px solid #f9a825; 
+    padding: 60px 80px;
+    gap: 40px;
+}
+
+.box5-left {
+    flex: 1;
+}
+
+.box5 h2 {
+    font-size: 28px;
+    color: #222;
+    font-weight: 700;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.box5-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px;
+}
+
+.box5-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.box5-text img {
+    width: 25px;
+    height: 25px;
+}
+
+.box5-text h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.box5-text p {
+    font-size: 13px;
+    color: #666;
+    margin: 0;
+    max-width: 90%; 
+}
+
+.box5-img {
+    flex: 0 0 40%;
+    background: url("home_records_gear.png") no-repeat center center/contain;
+    height: 200px;
+}
+
+/* Footer */
+.box6 {
+    height: 150px;
+    background-color: rgba(128, 128, 128, 0.361);
+}
+
+.box6-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.box6 p {
+    font-size: 14px;
+    color: white;
+    margin-top: 10px;
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    margin: 10px 0;
+    background-color: #ccc;
+}
