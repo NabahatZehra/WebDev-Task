@@ -50,7 +50,18 @@ body {
   color: #f9a825;
 }
 
-
+.heading {
+  font-size: 40px;
+  text-align: right;
+  margin-top: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+.heading-white {
+  color: white;
+}
+.heading-yellow {
+  color: #f9a825;
+}
 .box6 {
   height: 150px;
   background-color: rgba(128, 128, 128, 0.361);
