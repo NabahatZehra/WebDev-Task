@@ -1,4 +1,4 @@
-/* Reset */
+
 * {
     margin-left: 10px;
     margin-right: 10px;
@@ -14,7 +14,6 @@ body {
     color: white; 
 }
 
-/* Navbar */
 .navbar {
     height: 130px;
     background-color: transparent;
@@ -52,19 +51,75 @@ body {
     color: #f9a825; 
 }
 
-/* Main */
+
 .mainBox {
     margin: 0;
     padding: 0;
 }
 
-/* Box1 */
+
 .box1 {
-    background-color: lightblue;
-    height: 400px;
+    position: relative;
+    width: 100%;
+    height: 600px;
 }
 
-/* Box2 */
+.slide_active {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center top;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.text-content {
+    color: white;
+    text-align: center;
+}
+.text-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.text-content h1 .themecolor {
+    color: #FFA820;
+}
+
+.text-content p {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.see-more {
+    margin-top: 40px;
+    width: 145px;
+    height: 36px;
+}
+
+.see-more img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+@keyframes fadeInUp{
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+}
+
 .box2 {
     height: 400px;
     background-color: white;
@@ -279,9 +334,6 @@ body {
     border-radius: 4px; 
     display: flex;
     flex-direction: column; 
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .box4-card img {
@@ -310,20 +362,22 @@ body {
     color: #ccc;
 }
 
-/* See More */
+.see-more{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  
+}
 .see-more img {
     width: 160px;       
     height: auto;
     cursor: pointer;
-    transition: transform 0.3s ease;
     margin-bottom: 10px;
 }
 
-.see-more img:hover {
-    transform: scale(1.05); 
-}
 
-/* Box5 */
+
 .box5 {
     display: flex;
     justify-content: space-between;
@@ -384,7 +438,6 @@ body {
     height: 200px;
 }
 
-/* Footer */
 .box6 {
     height: 150px;
     background-color: rgba(128, 128, 128, 0.361);
@@ -413,4 +466,94 @@ body {
     height: 2px;
     margin: 10px 0;
     background-color: #ccc;
+}
+
+@media (max-width: 992px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .nav-logo {
+    height: 100px;
+    width: 100px;
+    margin-bottom: 10px;
+  }
+
+  .box3-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gallery {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .prepare {
+    width: 100%;
+    text-align: center;
+  }
+
+  .box5 {
+    flex-direction: column;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .box5-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .box5-img {
+    width: 100%;
+    height: 150px;
+    margin-top: 20px;
+  }
+}
+
+/* For mobile screens */
+@media (max-width: 600px) {
+  .text-content h1 {
+    font-size: 2rem;
+  }
+
+  .text-content p {
+    font-size: 1rem;
+  }
+
+  .see-more img {
+    width: 120px;
+  }
+
+  .box2_card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .prepare ul {
+    columns: 1;
+  }
+
+  .box4-container {
+    grid-template-columns: 1fr;
+  }
+
+  .box5 h2 {
+    font-size: 22px;
+  }
+
+  .box5-text h3 {
+    font-size: 16px;
+  }
+
+  .box6 p {
+    font-size: 12px;
+  }
 }

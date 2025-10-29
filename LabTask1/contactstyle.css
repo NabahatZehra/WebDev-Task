@@ -246,3 +246,144 @@ body {
   margin: 10px 0;
   background-color: #ccc;
 }
+
+@media (max-width: 992px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    text-align: center;
+    padding: 15px 10px;
+  }
+
+  .nav-logo {
+    height: 100px;
+    width: 100px;
+    margin-bottom: 10px;
+  }
+
+  .navbar a {
+    font-size: 13px;
+    margin: 6px 10px;
+    display: inline-block;
+  }
+
+  .heading {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .contact-header-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .contact-header-text,
+  .contact-header-info {
+    text-align: center;
+  }
+
+  .contact-header-icon img {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+
+  .contact-section {
+    flex-direction: column;
+    padding: 30px 20px;
+  }
+
+  .contact-info,
+  .contact-form,
+  .contact-icon {
+    width: 100%;
+    text-align: center;
+  }
+
+  .contact-icon {
+    padding-top: 20px;
+  }
+
+  .contact-form input[type="text"],
+  .contact-form input[type="email"] {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .box6 {
+    height: auto;
+    padding: 20px 10px;
+  }
+
+  .box6 p {
+    font-size: 13px;
+  }
+}
+
+/* For mobile screens (width ≤ 600px) */
+@media (max-width: 600px) {
+  * {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .navbar a {
+    font-size: 12px;
+    display: block;
+    margin: 5px 0;
+  }
+
+  .heading {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .contact-header {
+    padding: 30px 15px;
+  }
+
+  .contact-header-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-header-text h2 {
+    font-size: 22px;
+  }
+
+  .contact-header-text p {
+    font-size: 14px;
+  }
+
+  .contact-header-info h3 {
+    font-size: 18px;
+  }
+
+  .contact-section {
+    padding: 20px 15px;
+  }
+
+  .contact-info h2,
+  .contact-form h2 {
+    font-size: 18px;
+  }
+
+  .contact-info p,
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 13px;
+  }
+
+  .contact-form button {
+    width: 100%;
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .contact-icon img {
+    max-width: 150px;
+  }
+
+  .box6 p {
+    font-size: 12px;
+  }
+}

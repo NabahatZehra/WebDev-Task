@@ -63,7 +63,7 @@ body {
   padding: 40px;
   box-sizing: border-box;
   margin-left: 0;
-  margin-right: 0;
+
 }
 .info-left {
   flex: 2;
@@ -248,4 +248,117 @@ body {
   height: 2px;       
   margin: 10px 0;         
   background-color: #ccc;                
+}
+
+@media (max-width: 992px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .nav-logo {
+    height: 100px;
+    width: 100px;
+    margin-bottom: 10px;
+  }
+
+  .info-box,
+  .details,
+  .about {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+  }
+
+  .info-left,
+  .details-left,
+  .about-left,
+  .about-right {
+    padding: 0;
+    width: 100%;
+  }
+
+  .info-right,
+  .details-right {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about {
+    gap: 20px;
+  }
+
+  .about-left {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .heading {
+    text-align: center;
+    font-size: 32px;
+  }
+
+  .background-image {
+    height: 300px;
+  }
+}
+
+/* For mobile screens */
+@media (max-width: 600px) {
+  .heading {
+    font-size: 26px;
+  }
+
+  .info-box,
+  .details,
+  .about {
+    padding: 20px 15px;
+  }
+
+  .info-left h2 {
+    font-size: 20px;
+  }
+
+  .info-left p,
+  .about-right p {
+    font-size: 14px;
+  }
+
+  .info-right h1 {
+    font-size: 36px;
+  }
+
+  .details-left h5 {
+    font-size: 14px;
+  }
+
+  .about-right h1 {
+    font-size: 20px;
+  }
+
+  .social-icons a {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .background-image {
+    height: 200px;
+  }
+
+  .box6 p {
+    font-size: 12px;
+  }
 }

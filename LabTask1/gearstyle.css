@@ -102,7 +102,6 @@ body {
   font-size: 15px;
   line-height: 1.8;
   color: #555;
-  /*max-width: 900px;*/
   margin: 0 auto;
 }
 
@@ -176,4 +175,122 @@ body {
   height: 2px;       
   margin: 10px 0;         
   background-color: #ccc;                
+}
+
+@media (max-width: 992px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    text-align: center;
+    padding: 15px 10px;
+  }
+
+  .nav-logo {
+    height: 100px;
+    width: 100px;
+    margin-bottom: 10px;
+  }
+
+  .navbar a {
+    display: inline-block;
+    font-size: 13px;
+    margin: 6px 10px;
+  }
+
+  .heading {
+    font-size: 30px;
+    text-align: center;
+  }
+
+  .gear-section {
+    padding: 40px 20px;
+  }
+
+  .gear-section h2 {
+    font-size: 24px;
+  }
+
+  .gear-subtitle {
+    font-size: 16px;
+  }
+
+  .mic-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .mic-item h3 {
+    font-size: 18px;
+  }
+
+  .mic-item p {
+    font-size: 13px;
+  }
+
+  .box6 {
+    height: auto;
+    padding: 20px;
+  }
+
+  .box6 p {
+    font-size: 13px;
+  }
+}
+
+/* For mobile screens (width ≤ 600px) */
+@media (max-width: 600px) {
+  * {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .navbar a {
+    font-size: 12px;
+    display: block;
+    margin: 5px 0;
+  }
+
+  .heading {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .gear-section {
+    padding: 25px 15px;
+  }
+
+  .gear-section h2 {
+    font-size: 20px;
+  }
+
+  .gear-subtitle {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 14px;
+  }
+
+  .mic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mic-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mic-item img {
+    width: 25px;
+  }
+
+  .mic-item h3 {
+    font-size: 16px;
+  }
+
+  .mic-item p {
+    font-size: 12px;
+  }
+
+  .box6 p {
+    font-size: 12px;
+  }
 }
