@@ -36,23 +36,51 @@ $(document).ready(function () {
     const postData = { title, body, userId: 1 };
 
     if (id) {
-      const index = posts.findIndex((p) => p.id == id);
-      if (index !== -1) {
-        posts[index].title = title;
-        posts[index].body = body;
-        renderPosts();
-        alert("Post updated successfully!");
-      }
+      // UPDATE - PUT request
+      $.ajax({
+        url: `${apiUrl}/${id}`,
+        method: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(postData),
+        success: function (response) {
+          const index = posts.findIndex((p) => p.id == id);
+          if (index !== -1) {
+            posts[index].title = title;
+            posts[index].body = body;
+            renderPosts();
+            alert("Post updated successfully!");
+          }
+          console.log("PUT Response:", response);
+        },
+        error: function (error) {
+          console.error("PUT Error:", error);
+          alert("Error updating post");
+        }
+      });
     } else {
-      const newPost = {
-        id: posts.length ? posts[posts.length - 1].id + 1 : 1,
-        title,
-        body,
-        userId: 1,
-      };
-      posts.push(newPost);
-      renderPosts();
-      alert("Post added successfully!");
+      // CREATE - POST request
+      $.ajax({
+        url: apiUrl,
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(postData),
+        success: function (response) {
+          const newPost = {
+            id: posts.length ? posts[posts.length - 1].id + 1 : 1,
+            title,
+            body,
+            userId: 1,
+          };
+          posts.push(newPost);
+          renderPosts();
+          alert("Post added successfully!");
+          console.log("POST Response:", response);
+        },
+        error: function (error) {
+          console.error("POST Error:", error);
+          alert("Error adding post");
+        }
+      });
     }
 
     $("#postForm")[0].reset();
@@ -72,9 +100,21 @@ $(document).ready(function () {
   $(document).on("click", ".delete-btn", function () {
     const id = $(this).data("id");
     if (confirm("Are you sure you want to delete this post?")) {
-      posts = posts.filter((p) => p.id != id);
-      renderPosts();
-      alert("Post deleted successfully!");
+      // DELETE request
+      $.ajax({
+        url: `${apiUrl}/${id}`,
+        method: "DELETE",
+        success: function (response) {
+          posts = posts.filter((p) => p.id != id);
+          renderPosts();
+          alert("Post deleted successfully!");
+          console.log("DELETE Response:", response);
+        },
+        error: function (error) {
+          console.error("DELETE Error:", error);
+          alert("Error deleting post");
+        }
+      });
     }
   });
 
