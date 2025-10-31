@@ -4,73 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Validation Form</title>
-
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom Dark Theme CSS -->
   <link rel="stylesheet" href="checkoutstyle.css">
-
-  <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-  <!-- Header -->
   <header class="checkout-header">
         <img src="../LabTask1/recordsLogo.png" alt="Logo" class="checkout-logo">
 
   </header>
 
-  <!-- Main Form -->
   <div class="checkout-container">
     <form id="validationForm" novalidate>
 
       <h1>Validation Form</h1>
       <h4 class="mb-4 text-center">Billing & Payment Information</h4>
 
-      <!-- Full Name -->
       <div class="mb-3">
         <label for="fullname" class="form-label">Full Name</label>
         <input type="text" id="fullname" class="form-control" placeholder="Enter your full name">
         <div class="invalid-feedback">Full name is required (min 3 characters).</div>
       </div>
 
-      <!-- Email -->
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" id="email" class="form-control" placeholder="Enter your email">
         <div class="invalid-feedback">Please enter a valid email.</div>
       </div>
 
-      <!-- Phone -->
       <div class="mb-3">
         <label for="phone" class="form-label">Phone</label>
         <input type="text" id="phone" class="form-control" placeholder="Enter your phone number">
         <div class="invalid-feedback">Enter a valid phone number (at least 10 digits).</div>
       </div>
 
-      <!-- Address -->
       <div class="mb-3">
         <label for="address" class="form-label">Address</label>
         <input type="text" id="address" class="form-control" placeholder="Enter your address">
         <div class="invalid-feedback">Address is required.</div>
       </div>
 
-      <!-- City -->
       <div class="mb-3">
         <label for="city" class="form-label">City</label>
         <input type="text" id="city" class="form-control" placeholder="Enter your city">
         <div class="invalid-feedback">City is required.</div>
       </div>
 
-      <!-- Postal Code -->
       <div class="mb-3">
         <label for="postal" class="form-label">Postal Code</label>
         <input type="text" id="postal" class="form-control" placeholder="Enter postal code">
         <div class="invalid-feedback">Postal code must be 4–6 digits.</div>
       </div>
 
-      <!-- Country -->
       <div class="mb-3">
         <label for="country" class="form-label">Country</label>
         <select id="country" class="form-select">
@@ -83,7 +68,6 @@
         <div class="invalid-feedback">Please select your country.</div>
       </div>
 
-      <!-- Payment Method -->
       <div class="mb-3">
         <label class="form-label">Payment Method</label>
         <div>
@@ -93,7 +77,6 @@
         <div class="invalid-feedback d-block" id="paymentError" style="display:none;">Please select a payment method.</div>
       </div>
 
-      <!-- Card Details -->
       <div id="cardDetails" style="display:none;">
         <div class="mb-3">
           <label for="cardNumber" class="form-label">Card Number</label>
@@ -114,14 +97,12 @@
         </div>
       </div>
 
-      <!-- Terms -->
       <div class="form-check mb-3">
         <input class="form-check-input" type="checkbox" id="terms">
         <label class="form-check-label" for="terms">I agree to the terms and conditions</label>
         <div class="invalid-feedback d-block" id="termsError" style="display:none;">You must agree before submitting.</div>
       </div>
 
-      <!-- Submit -->
       <button type="submit" class="btn btn-custom w-100">Submit</button>
     </form>
   </div>
@@ -134,10 +115,8 @@
     </div>
   </footer>
 
-  <!-- jQuery Validation Script -->
   <script>
     $(document).ready(function() {
-      // Show/hide card details
       $('input[name="payment"]').change(function() {
         if ($('#payCard').is(':checked')) {
           $('#cardDetails').slideDown();
@@ -147,7 +126,6 @@
         }
       });
 
-      // Validation logic
       $('#validationForm').on('submit', function(e) {
         e.preventDefault();
         let valid = true;
@@ -161,34 +139,26 @@
           $(sel).removeClass('is-invalid').addClass('is-valid');
         }
 
-        // Full Name
         let name = $('#fullname').val().trim();
         name.length >= 3 ? validate('#fullname') : invalidate('#fullname');
 
-        // Email
         let email = $('#email').val().trim();
         let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         emailRegex.test(email) ? validate('#email') : invalidate('#email');
 
-       
-        // Phone
         let phone = $('#phone').val().trim();
         let phoneRegex = /^[0-9]{10,}$/;
         phoneRegex.test(phone) ? validate('#phone') : invalidate('#phone');
 
-        // Address, City
         $('#address').val().trim() ? validate('#address') : invalidate('#address');
         $('#city').val().trim() ? validate('#city') : invalidate('#city');
 
-        // Postal Code
         let postal = $('#postal').val().trim();
         let postalRegex = /^[0-9]{4,6}$/;
         postalRegex.test(postal) ? validate('#postal') : invalidate('#postal');
 
-        // Country
         $('#country').val() ? validate('#country') : invalidate('#country');
 
-        // Payment
         if ($('input[name="payment"]:checked').length === 0) {
           $('#paymentError').show();
           valid = false;
@@ -196,14 +166,12 @@
           $('#paymentError').hide();
         }
 
-        // Card Fields (if card selected)
         if ($('#payCard').is(':checked')) {
           $('#cardNumber').val().trim() ? validate('#cardNumber') : invalidate('#cardNumber');
           $('#expiry').val().trim() ? validate('#expiry') : invalidate('#expiry');
           $('#cvv').val().trim() ? validate('#cvv') : invalidate('#cvv');
         }
 
-        // Terms
         if (!$('#terms').is(':checked')) {
           $('#termsError').show();
           valid = false;
@@ -211,7 +179,6 @@
           $('#termsError').hide();
         }
 
-        // Smooth scroll to first invalid field
         if (!valid) {
           $('html, body').animate({ scrollTop: $('.is-invalid:first').offset().top - 100 }, 500);
           return;
