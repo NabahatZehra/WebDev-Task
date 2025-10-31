@@ -1,16 +1,14 @@
 $(document).ready(function () {
   const apiUrl = "https://jsonplaceholder.typicode.com/posts";
-  let posts = []; // local array to store and manage posts
+  let posts = []; 
 
-  // ===== Read (Fetch and Display Posts) =====
   function loadPosts() {
     $.get(apiUrl, function (data) {
-      posts = data.slice(0, 10); // store first 10 posts locally
+      posts = data.slice(0, 10); 
       renderPosts();
     });
   }
 
-  // ===== Render posts in table =====
   function renderPosts() {
     const rows = posts.map(
       (post) => `
@@ -29,7 +27,6 @@ $(document).ready(function () {
 
   loadPosts();
 
-  // ===== Create or Update =====
   $("#postForm").submit(function (e) {
     e.preventDefault();
 
@@ -39,7 +36,6 @@ $(document).ready(function () {
     const postData = { title, body, userId: 1 };
 
     if (id) {
-      // ----- Update -----
       const index = posts.findIndex((p) => p.id == id);
       if (index !== -1) {
         posts[index].title = title;
@@ -48,7 +44,6 @@ $(document).ready(function () {
         alert("Post updated successfully!");
       }
     } else {
-      // ----- Create -----
       const newPost = {
         id: posts.length ? posts[posts.length - 1].id + 1 : 1,
         title,
@@ -64,7 +59,6 @@ $(document).ready(function () {
     $("#postId").val("");
   });
 
-  // ===== Edit (Prefill Form) =====
   $(document).on("click", ".edit-btn", function () {
     const id = $(this).data("id");
     const post = posts.find((p) => p.id == id);
@@ -75,7 +69,6 @@ $(document).ready(function () {
     }
   });
 
-  // ===== Delete =====
   $(document).on("click", ".delete-btn", function () {
     const id = $(this).data("id");
     if (confirm("Are you sure you want to delete this post?")) {
@@ -85,7 +78,6 @@ $(document).ready(function () {
     }
   });
 
-  // ===== Cancel Edit =====
   $("#cancelEdit").click(function () {
     $("#postId").val("");
     $("#postForm")[0].reset();
