@@ -295,18 +295,7 @@ body {
     position: relative;
     display: inline-block;
     padding-bottom: 15px;  
-}
-
-.box4 h2::after {
-    content: "";
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 8px;
-    background: url("home_record_dots.png") repeat-x center;
-    background-size: contain;
+    border-bottom: 3px dotted #f9a825;
 }
 
 .box4-container {
@@ -540,5 +529,107 @@ body {
 
   .box6 p {
     font-size: 12px;
+  }
+}
+
+.testimonials-section {
+  background-color: #1a1c1c;
+  padding: 60px 40px;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+.heading {
+  font-size: 40px;
+  text-align:center;
+  margin-top: 20px;
+  border-bottom: 3px dotted #f9a825;
+}
+.heading-white {
+  color: white;
+}
+.heading-yellow {
+  color: #f9a825;
+}
+
+.testimonials {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.testimonial {
+  display: flex;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px 20px;
+  border-left: 4px solid #f9a825;
+  border-radius: 8px;
+
+}
+
+.testimonial:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.profile-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 15px;
+  border: 2px solid #f9a825;
+}
+
+.testimonial-content {
+  flex: 1;
+}
+
+.customer-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #f9a825;
+}
+
+.stars {
+  font-size: 14px;
+  color: gold;
+  margin-bottom: 8px;
+}
+
+.review-text {
+  font-size: 14px;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.view-more-btn {
+  display: block;
+  margin: 25px auto 0 auto;
+  background-color: #f9a825;
+  color: black;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 30px;
+}
+
+.view-more-btn:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .testimonial {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-img {
+    margin: 0 auto 10px auto;
   }
 }

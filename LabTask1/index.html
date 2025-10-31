@@ -183,8 +183,68 @@
             </div>
             <div class="box5-img"></div>
         </div>
-    </main>
+        <section class="testimonials-section">
+            <h2 class="heading">Customer<span class="heading-yellow">Testimonials</span></h2>
 
+
+            <div class="testimonials">
+                <div class="testimonial">
+                    <img src="images.png" alt="Profile 1" class="profile-img">
+                    <div class="testimonial-content">
+                        <h4 class="customer-name">Muhammad Hussain</h4>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p class="review-text">The sound quality of these speakers is unreal, crystal clear highs and deep, rich bass. Perfect for my home studio!</p>
+                    </div>
+                </div>
+
+            <div class="testimonial">
+                <img src="images.png" alt="Profile 2" class="profile-img">
+                <div class="testimonial-content">
+                    <h4 class="customer-name">Ali Raza</h4>
+                    <div class="stars">⭐⭐⭐⭐</div>
+                        <p class="review-text">I recorded my latest track here, and the mixing setup was outstanding. The engineers really know what they’re doing.</p>
+                </div>
+            </div>
+
+            <div class="testimonial hidden">
+                <img src="images.png" alt="Profile 3" class="profile-img">
+                <div class="testimonial-content">
+                    <h4 class="customer-name">Sara Ahmed</h4>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">These studio monitors helped me finally hear the details I was missing in my mixes. Totally worth the investment!</p>
+                </div>
+            </div>
+
+            <div class="testimonial hidden">
+                <img src="images.png" alt="Profile 4" class="profile-img">
+                <div class="testimonial-content">
+                    <h4 class="customer-name">Hassan Ali</h4>
+                    <div class="stars">⭐⭐⭐</div>
+                    <p class="review-text">The speakers sound good overall, but I wish the bass response was a bit tighter for studio mixing.</p>
+                </div>
+            </div>
+
+            <div class="testimonial hidden">
+                <img src="images.png" alt="Profile 5" class="profile-img">
+                <div class="testimonial-content">
+                    <h4 class="customer-name">Shahzain Ali</h4>
+                    <div class="stars">⭐⭐⭐</div>
+                    <p class="review-text">The studio was well-equipped, but I had to wait a bit before my slot started. Staff was polite though</p>
+                </div>
+            </div>
+
+            <div class="testimonial hidden">
+                <img src="images.png" alt="Profile 6" class="profile-img">
+                <div class="testimonial-content">
+                    <h4 class="customer-name">Kinza Yusaf</h4>
+                    <div class="stars">⭐⭐⭐⭐</div>
+                    <p class="review-text">“Decent experience. The recording came out clean, but the mic stand could've been sturdier.</p>
+                </div>
+            </div>
+        </div>
+        <button class="view-more-btn" id="viewMoreBtn">View More</button>
+        </section>
+    </main>
 
     <footer class="box6">
         <div class="box6-container">
@@ -193,6 +253,17 @@
             <p>© 2021 Betheme by Muffin group | All Rights Reserved | Powered by WordPress</p>
         </div>
     </footer>
-    
+
+    <script>
+  const viewMoreBtn = document.getElementById("viewMoreBtn");
+  const hiddenTestimonials = document.querySelectorAll(".testimonial.hidden");
+
+  viewMoreBtn.addEventListener("click", () => {
+    hiddenTestimonials.forEach(t => t.classList.toggle("hidden"));
+    viewMoreBtn.textContent =
+      viewMoreBtn.textContent === "View More" ? "View Less" : "View More";
+  });
+</script>
+
 </body>
 </html>
