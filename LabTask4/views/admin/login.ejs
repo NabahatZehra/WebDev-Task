@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | BeRecords</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f1111 0%, #1a1c1c 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(26, 28, 28, 0.9);
+            border: 2px solid #f9a825;
+            border-radius: 10px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(249, 168, 37, 0.3);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .logo-container img {
+            width: 110px;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(249, 168, 37, 0.5));
+        }
+
+        .admin-badge {
+            background: #f9a825;
+            color: #0f1111;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .login-header h1 {
+            font-size: 30px;
+            color: #f9a825;
+            margin-bottom: 8px;
+        }
+
+        .login-header p {
+            color: #ccc;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #f9a825;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #0f1111;
+            border: 2px solid #333;
+            border-radius: 5px;
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #f9a825;
+            outline: none;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: #f9a825;
+            color: #0f1111;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 5px;
+        }
+
+        .btn-login:hover {
+            background: #ffc107;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(249, 168, 37, 0.4);
+        }
+
+        .error-message {
+            background: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #333;
+        }
+
+        .links p {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .links a {
+            color: #f9a825;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .back-link a {
+            color: #888;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link a:hover {
+            color: #f9a825;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+
+            .logo-container img {
+                width: 90px;
+            }
+
+            .login-header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo-container">
+                <img src="/images/recordsLogo.png" alt="BeRecords Logo">
+            </div>
+            <div class="admin-badge">ADMIN PANEL</div>
+            <h1>Admin Login</h1>
+            <p>Sign in to manage BeRecords content</p>
+        </div>
+
+        <% if (error) { %>
+            <div class="error-message"><%= error %></div>
+        <% } %>
+
+        <form action="/admin/login" method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="btn-login">Login</button>
+        </form>
+
+        <div class="links">
+            <p>Don't have an account?</p>
+            <a href="/admin/register">Create an admin account →</a>
+        </div>
+
+        <div class="back-link">
+            <a href="/">← Back to Website</a>
+        </div>
+    </div>
+</body>
+</html>

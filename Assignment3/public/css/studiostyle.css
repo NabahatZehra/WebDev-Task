@@ -1,0 +1,364 @@
+* {
+  margin-left: 10px;
+  margin-right: 10px;
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+body {
+  background-color: #0f1111;
+  color: white;
+}
+.navbar {
+  height: 130px;
+  background-color: transparent;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 2px dotted #fff;
+  margin-bottom: 20px;
+}
+.nav-logo {
+  height: 120px;
+  width: 120px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.navbar a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: white;
+  margin: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+.navbar a:hover,
+.navbar a.active {
+  font-weight: 700;
+  color: #f9a825;
+}
+.heading {
+  font-size: 40px;
+  text-align: right;
+  margin-top: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+.heading-white {
+  color: white;
+}
+.heading-yellow {
+  color: #f9a825;
+}
+.info-box {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px;
+  box-sizing: border-box;
+  margin-left: 0;
+
+}
+.info-left {
+  flex: 2;
+  padding-right: 30px;
+}
+.info-left h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 10px;
+}
+.underline {
+  width: 90px;
+  height: 2px;
+  border-bottom: 3px dotted #f9a825;
+  margin-bottom: 20px;
+}
+.info-left p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+.info-right {
+  flex: 1;
+  padding: 30px;
+  text-align: right;
+}
+.info-right h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0;
+  color: #000;
+}
+.info-right p {
+  font-size: 14px;
+  color: #555;
+}
+.background-image{
+  height: 400px;
+  background: url("/images/home_records_studio.jpg") no-repeat center center;
+  background-size: cover;
+  margin: 0;
+}
+.details{
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px;
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+  border-bottom: #555 2px dotted;
+}
+.details-left {
+  flex: 2;
+  padding-right: 30px;
+  text-align: left;
+  color: #000;
+}
+.details-left h5 {
+  font-size: 15px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.details-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.details-right{
+  flex: 1;
+  padding: 30px;
+}
+.about{
+  background-color: #fff;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 40px;
+  box-sizing: border-box;
+  margin-left: 0;
+  margin-right: 0;
+  gap: 30px;
+}
+.about-left{
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.about-img{
+  height: 220px;
+  width: 200px;
+  background: url("/images/home_records_studio_team.jpg") no-repeat center center;
+  background-size: cover;
+  flex-shrink: 0;
+}
+.about-text{
+  flex: 1;
+  color: #0f1111;
+  text-align: left;
+}
+.text1{
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #222;
+}
+.text2{
+  font-size: 15px;
+  margin-bottom: 10px;
+  display: inline-block;
+  color: #777;
+  border-bottom: 2px solid #f9a825;
+  padding-bottom: 3px;
+}
+.text3{
+  font-size: 14px;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 15px;
+}
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+   width: 36px;
+  height: 36px;
+  font-size: 16px;
+  color: #444;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+.social-icons a:hover {
+  background: #f9a825;
+  color: #fff;
+  border-color: #f9a825;
+}
+.about-right{
+  flex: 2;
+  padding-right: 20px;
+  text-align: left;
+  color: #000;
+}
+.about-right h1 {
+  font-size: 25px;
+  margin-bottom: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.about-right p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 15px;
+}
+.box6 {
+  height: 150px;
+  background-color: rgba(128, 128, 128, 0.361);
+}
+.box6-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+.box6 p {
+  font-size: 14px;
+  color: white;
+  margin-top: 10px;
+}
+.divider {
+  width: 100%;               
+  height: 2px;       
+  margin: 10px 0;         
+  background-color: #ccc;                
+}
+
+@media (max-width: 992px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .nav-logo {
+    height: 100px;
+    width: 100px;
+    margin-bottom: 10px;
+  }
+
+  .info-box,
+  .details,
+  .about {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+  }
+
+  .info-left,
+  .details-left,
+  .about-left,
+  .about-right {
+    padding: 0;
+    width: 100%;
+  }
+
+  .info-right,
+  .details-right {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about {
+    gap: 20px;
+  }
+
+  .about-left {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .heading {
+    text-align: center;
+    font-size: 32px;
+  }
+
+  .background-image {
+    height: 300px;
+  }
+}
+
+/* For mobile screens */
+@media (max-width: 600px) {
+  .heading {
+    font-size: 26px;
+  }
+
+  .info-box,
+  .details,
+  .about {
+    padding: 20px 15px;
+  }
+
+  .info-left h2 {
+    font-size: 20px;
+  }
+
+  .info-left p,
+  .about-right p {
+    font-size: 14px;
+  }
+
+  .info-right h1 {
+    font-size: 36px;
+  }
+
+  .details-left h5 {
+    font-size: 14px;
+  }
+
+  .about-right h1 {
+    font-size: 20px;
+  }
+
+  .social-icons a {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .background-image {
+    height: 200px;
+  }
+
+  .box6 p {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,474 @@
+<%- include('partials/header') %>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .products-hero {
+        text-align: center;
+        padding: 60px 20px;
+        background: linear-gradient(135deg, #1a1c1c 0%, #2a2c2c 100%);
+        border-bottom: 4px solid #f9a825;
+        margin-bottom: 40px;
+        min-height: 180px;
+    }
+
+    .products-hero h1 {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-size: 48px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .products-hero h1 .highlight {
+        color: #f9a825;
+    }
+
+    .products-hero p {
+        font-size: 18px;
+        color: #ccc;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .filters-section {
+        background: #1a1c1c;
+        border: 2px solid #333;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 40px;
+    }
+
+    .filters-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        align-items: end;
+    }
+
+    .filter-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .filter-group label {
+        color: #f9a825;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .filter-group select,
+    .filter-group input {
+        background: #0f1111;
+        border: 2px solid #333;
+        color: white;
+        padding: 12px;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+    }
+
+    .filter-group select:focus,
+    .filter-group input:focus {
+        border-color: #f9a825;
+        outline: none;
+    }
+
+    .btn-filter {
+        background: linear-gradient(135deg, #f9a825 0%, #ffc107 100%);
+        color: #0f1111;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: transform 0.2s, box-shadow 0.2s;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-filter:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(249, 168, 37, 0.5);
+    }
+
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+        min-height: 400px;
+    }
+
+    .product-card {
+        background: #1a1c1c;
+        border: 2px solid #333;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+        cursor: pointer;
+        height: fit-content;
+    }
+
+    .product-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 25px rgba(249, 168, 37, 0.3);
+        border-color: #f9a825;
+    }
+
+    .product-image-container {
+        width: 100%;
+        height: 250px;
+        background: #0f1111;
+        border-bottom: 3px solid #f9a825;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .product-image.loaded {
+        opacity: 1;
+    }
+
+    /* Loading spinner - only show when image is NOT loaded */
+    .product-image-container.loading::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        border: 3px solid #333;
+        border-top-color: #f9a825;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .product-info {
+        padding: 20px;
+    }
+
+    .product-category {
+        background: rgba(249, 168, 37, 0.2);
+        color: #f9a825;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 11px;
+        display: inline-block;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .product-name {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 10px;
+        min-height: 50px;
+    }
+
+    .product-description {
+        color: #999;
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 15px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        min-height: 66px;
+    }
+
+    .product-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 15px;
+        border-top: 1px solid #333;
+    }
+
+    .product-price {
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-size: 24px;
+        font-weight: 700;
+        color: #f9a825;
+    }
+
+    .product-stock {
+        font-size: 12px;
+        color: #28a745;
+        font-weight: 600;
+    }
+
+    .product-stock.low {
+        color: #dc3545;
+    }
+
+    .btn-view-details {
+        background: #f9a825;
+        color: #0f1111;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 12px;
+        text-transform: uppercase;
+        transition: background 0.3s, transform 0.2s;
+        display: inline-block;
+    }
+
+    .btn-view-details:hover {
+        background: #ffc107;
+        transform: scale(1.05);
+    }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 40px 0;
+    }
+
+    .pagination a,
+    .pagination span {
+        padding: 10px 18px;
+        background: #1a1c1c;
+        border: 2px solid #333;
+        border-radius: 5px;
+        color: white;
+        text-decoration: none;
+        transition: border-color 0.3s, color 0.3s, transform 0.2s;
+        font-weight: 600;
+        min-width: 45px;
+        text-align: center;
+    }
+
+    .pagination a:hover {
+        border-color: #f9a825;
+        color: #f9a825;
+        transform: translateY(-2px);
+    }
+
+    .pagination .active {
+        background: #f9a825;
+        color: #0f1111;
+        border-color: #f9a825;
+    }
+
+    .pagination .disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 80px 20px;
+        color: #666;
+        grid-column: 1 / -1;
+    }
+
+    .empty-state-icon {
+        font-size: 72px;
+        margin-bottom: 20px;
+        opacity: 0.5;
+    }
+
+    .empty-state h3 {
+        font-size: 28px;
+        color: #999;
+        margin-bottom: 10px;
+    }
+
+    .empty-state p {
+        font-size: 16px;
+        color: #666;
+    }
+
+    .results-info {
+        text-align: center;
+        color: #999;
+        margin-bottom: 30px;
+        font-size: 14px;
+        min-height: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .products-hero h1 {
+            font-size: 32px;
+        }
+
+        .filters-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .products-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="products-hero">
+    <h1>Our <span class="highlight">Services</span></h1>
+    <p>Professional recording, mixing, and mastering services for your music</p>
+</div>
+
+<main style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+    <!-- Filters Section -->
+    <div class="filters-section">
+        <form action="/products" method="GET" class="filters-grid">
+            <div class="filter-group">
+                <label for="category">Category</label>
+                <select name="category" id="category">
+                    <option value="all" <%= filters.category === 'all' ? 'selected' : '' %>>All Categories</option>
+                    <% categories.forEach(cat => { %>
+                        <option value="<%= cat %>" <%= filters.category === cat ? 'selected' : '' %>>
+                            <%= cat %>
+                        </option>
+                    <% }) %>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="minPrice">Min Price ($)</label>
+                <input type="number" name="minPrice" id="minPrice" placeholder="0" value="<%= filters.minPrice %>" min="0">
+            </div>
+
+            <div class="filter-group">
+                <label for="maxPrice">Max Price ($)</label>
+                <input type="number" name="maxPrice" id="maxPrice" placeholder="1000" value="<%= filters.maxPrice %>" min="0">
+            </div>
+
+            <div class="filter-group">
+                <label for="search">Search</label>
+                <input type="text" name="search" id="search" placeholder="Search products..." value="<%= filters.search %>">
+            </div>
+
+            <div class="filter-group">
+                <label for="limit">Show</label>
+                <select name="limit" id="limit">
+                    <option value="10" <%= filters.limit == 10 ? 'selected' : '' %>>10 per page</option>
+                    <option value="20" <%= filters.limit == 20 ? 'selected' : '' %>>20 per page</option>
+                    <option value="50" <%= filters.limit == 50 ? 'selected' : '' %>>50 per page</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-filter">Apply Filters</button>
+            <a href="/products" class="btn-filter" style="background: #333; text-align: center; text-decoration: none; display: inline-block;">Reset</a>
+        </form>
+    </div>
+
+    <!-- Results Info -->
+    <div class="results-info">
+        <% if (products.length > 0) { %>
+            Showing <%= products.length %> of <%= totalProducts %> products
+            <% if (filters.category !== 'all') { %>
+                in <strong><%= filters.category %></strong>
+            <% } %>
+        <% } %>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid">
+        <% if (products.length > 0) { %>
+            <% products.forEach(product => { %>
+                <div class="product-card">
+                    <div class="product-image-container loading">
+                        <img 
+                            src="<%= product.image %>" 
+                            alt="<%= product.name %>" 
+                            class="product-image"
+                            loading="lazy"
+                            onerror="this.src='/images/placeholder.jpg'; this.classList.add('loaded'); this.parentElement.classList.remove('loading');"
+                            onload="this.classList.add('loaded'); this.parentElement.classList.remove('loading');"
+                        >
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category"><%= product.category %></span>
+                        <h3 class="product-name"><%= product.name %></h3>
+                        <p class="product-description"><%= product.description %></p>
+                        <div class="product-footer">
+                            <div>
+                                <div class="product-price">$<%= product.price %></div>
+                                <div class="product-stock <%= product.stock < 5 ? 'low' : '' %>">
+                                    <%= product.stock > 0 ? 'In Stock: ' + product.stock : 'Out of Stock' %>
+                                </div>
+                            </div>
+                            <a href="/products/<%= product._id %>" class="btn-view-details">
+                                View Details
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <% } else { %>
+            <div class="empty-state">
+                <div class="empty-state-icon">📦</div>
+                <h3>No Products Found</h3>
+                <p>Try adjusting your filters or check back later for new services.</p>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- Pagination -->
+    <% if (totalPages > 1) { %>
+        <div class="pagination">
+            <% if (hasPrevPage) { %>
+                <a href="?page=<%= currentPage - 1 %>&category=<%= filters.category %>&minPrice=<%= filters.minPrice %>&maxPrice=<%= filters.maxPrice %>&search=<%= filters.search %>&limit=<%= filters.limit %>">
+                    ← Previous
+                </a>
+            <% } else { %>
+                <span class="disabled">← Previous</span>
+            <% } %>
+
+            <% for (let i = 1; i <= totalPages; i++) { %>
+                <% if (i === currentPage) { %>
+                    <span class="active"><%= i %></span>
+                <% } else { %>
+                    <a href="?page=<%= i %>&category=<%= filters.category %>&minPrice=<%= filters.minPrice %>&maxPrice=<%= filters.maxPrice %>&search=<%= filters.search %>&limit=<%= filters.limit %>">
+                        <%= i %>
+                    </a>
+                <% } %>
+            <% } %>
+
+            <% if (hasNextPage) { %>
+                <a href="?page=<%= currentPage + 1 %>&category=<%= filters.category %>&minPrice=<%= filters.minPrice %>&maxPrice=<%= filters.maxPrice %>&search=<%= filters.search %>&limit=<%= filters.limit %>">
+                    Next →
+                </a>
+            <% } else { %>
+                <span class="disabled">Next →</span>
+            <% } %>
+        </div>
+    <% } %>
+</main>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,23 @@
+<footer class="box6">
+    <div class="box6-container">
+        <img src="/images/home_record_footer_logo.png" alt="Logo">
+        <div class="divider"></div>
+        <p>© 2021 Betheme by Muffin group | All Rights Reserved</p>
+    </div>
+</footer>
+
+<script>
+  const viewMoreBtn = document.getElementById("viewMoreBtn");
+  const hiddenTestimonials = document.querySelectorAll(".testimonial.hidden");
+
+  if (viewMoreBtn) {
+    viewMoreBtn.addEventListener("click", () => {
+      hiddenTestimonials.forEach(t => t.classList.toggle("hidden"));
+      viewMoreBtn.textContent =
+        viewMoreBtn.textContent === "View More" ? "View Less" : "View More";
+    });
+  }
+</script>
+
+</body>
+</html>

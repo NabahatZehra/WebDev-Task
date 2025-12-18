@@ -1,0 +1,68 @@
+
+  <!-- Header Partial -->
+  <%- include('partials/header',  { title: "Gear" }) %>
+
+  <main>
+    <h1 class="heading">OUR<span class="heading-yellow">GEAR</span></h1>
+
+    <section class="gear-section">
+      <h2>MIXING CONSOLE</h2>
+      <div class="gear-subtitle">
+        <img src="/images/home_record_icon_1.png" alt="Play Icon">
+        <span>Sonic State Logic 256 HQ TL CONSOLE</span>
+      </div>
+      <p>Nullam wisi ultricies a, gravida vitae, dapibus risus ante sodales lectus blandit eu...</p>
+    </section>
+
+    <div class="gear-divider"></div>
+
+    <section class="gear-section">
+      <h2>MICROPHONES</h2>
+      <div class="mic-grid">
+        <% for (let i = 1; i <= 6; i++) { %>
+          <div class="mic-item">
+            <img src="/images/home_record_icon_1.png" alt="Mic Icon">
+            <div>
+              <h3>Mic name <%= i %></h3>
+              <p>Vitae adipiscing turpis. Aenean ligula nibh, molestie...</p>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </section>
+
+    <section class="gear-section">
+      <h2>SPEAKERS</h2>
+      <div class="mic-grid">
+        <% for (let i = 1; i <= 3; i++) { %>
+          <div class="mic-item">
+            <img src="/images/home_record_icon_1.png" alt="Speaker Icon">
+            <div>
+              <h3>Speaker name <%= i %></h3>
+              <p>Vitae adipiscing turpis. Aenean ligula nibh, molestie...</p>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </section>
+
+    <section class="gear-section">
+      <h2>INSTRUMENTS</h2>
+      <div class="mic-grid">
+        <% for (let i = 1; i <= 6; i++) { %>
+          <div class="mic-item">
+            <img src="/images/home_record_icon_1.png" alt="Instrument Icon">
+            <div>
+              <h3>Instrument name <%= i %></h3>
+              <p>Vitae adipiscing turpis. Aenean ligula nibh, molestie...</p>
+            </div>
+          </div>
+        <% } %>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer Partial -->
+  <%- include('partials/footer') %>
+
