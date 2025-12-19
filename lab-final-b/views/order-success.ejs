@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+    <div class="container" style="padding: 120px 20px; min-height: 80vh; text-align: center; color: white;">
+        <div
+            style="max-width: 600px; margin: 0 auto; background: #1a1a1a; padding: 50px; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.5);">
+            <div style="font-size: 4rem; margin-bottom: 20px;">🎉</div>
+            <h1 style="color: #f1b350; margin-bottom: 20px;">Order Placed Successfully!</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; color: #ccc;">Thank you for your purchase. Your order has
+                been received and is being processed.</p>
+
+            <div style="background: #2a2a2a; padding: 20px; border-radius: 8px; margin-bottom: 30px; text-align: left;">
+                <p style="margin: 5px 0;"><strong>Order ID:</strong>
+                    <%= order._id %>
+                </p>
+                <p style="margin: 5px 0;"><strong>Total Amount:</strong> $<%= order.total.toFixed(2) %>
+                </p>
+                <p style="margin: 5px 0;"><strong>Status:</strong> <span style="color: #f9a825;">
+                        <%= order.status %>
+                    </span></p>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <a href="/products" class="btn-primary"
+                    style="padding: 12px 30px; background: #f1b350; color: #000; text-decoration: none; border-radius: 4px; font-weight: bold;">Continue
+                    Shopping</a>
+                <a href="/my-orders"
+                    style="display: inline-block; padding: 12px 25px; background: transparent; border: 2px solid #ccc; color: #ccc; text-decoration: none; border-radius: 4px; font-weight: bold;">View
+                    My Orders</a>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>

@@ -1,0 +1,231 @@
+<%- include('../partials/header') %>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0f1111 0%, #1a1c1c 100%);
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 25px;
+            background: rgba(26, 28, 28, 0.95);
+            border-radius: 10px;
+            border: 2px solid #f9a825;
+            box-shadow: 0 10px 30px rgba(249, 168, 37, 0.25);
+            color: white;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+        }
+
+        .admin-header h1 {
+            font-size: 24px;
+            color: #f9a825;
+            margin: 0;
+        }
+
+        .back-btn {
+            background: #333;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            color: #f9a825;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        td {
+            color: #ddd;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-placed {
+            background: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+        }
+
+        .status-processing {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+
+        .status-delivered {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+
+        .btn-action {
+            padding: 6px 12px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            transition: transform 0.2s;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-process {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-deliver {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .status-completed {
+            color: #2ecc71;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .alert-success {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+            border: 1px solid #2ecc71;
+        }
+
+        .alert-error {
+            background: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+    </style>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1>📦 Manage Orders</h1>
+            <a href="/admin/dashboard" class="back-btn">← Back to Dashboard</a>
+        </div>
+
+        <% if (success) { %>
+            <div class="alert alert-success">✓ <%= success %>
+            </div>
+            <% } %>
+
+                <% if (error) { %>
+                    <div class="alert alert-error">⚠ <%= error %>
+                    </div>
+                    <% } %>
+
+                        <% if (orders.length===0) { %>
+                            <div style="text-align: center; padding: 40px; color: #666;">
+                                <h3>No orders found</h3>
+                                <p>New orders will appear here.</p>
+                            </div>
+                            <% } else { %>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Customer</th>
+                                            <th>Date</th>
+                                            <th>Total</th>
+                                            <th>Current Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% orders.forEach(order=> { %>
+                                            <tr>
+                                                <td style="font-family: monospace; color: #999;">#<%=
+                                                        order._id.toString().substring(order._id.toString().length - 6)
+                                                        %>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <%= order.customer.name %>
+                                                    </div>
+                                                    <div style="font-size: 12px; color: #666;">
+                                                        <%= order.customer.email %>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <%= new Date(order.createdAt).toLocaleDateString() %>
+                                                </td>
+                                                <td>$<%= order.total.toFixed(2) %>
+                                                </td>
+                                                <td>
+                                                    <span class="status-badge status-<%= order.status.toLowerCase() %>">
+                                                        <%= order.status %>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <form action="/admin/orders/status" method="POST">
+                                                        <input type="hidden" name="orderId" value="<%= order._id %>">
+
+                                                        <% if (order.status==='Placed' ) { %>
+                                                            <input type="hidden" name="newStatus" value="Processing">
+                                                            <button type="submit" class="btn-action btn-process">
+                                                                Mark Processing &rarr;
+                                                            </button>
+                                                            <% } else if (order.status==='Processing' ) { %>
+                                                                <input type="hidden" name="newStatus" value="Delivered">
+                                                                <button type="submit" class="btn-action btn-deliver">
+                                                                    Mark Delivered &rarr;
+                                                                </button>
+                                                                <% } else if (order.status==='Delivered' ) { %>
+                                                                    <div class="status-completed">
+                                                                        ✓ Completed
+                                                                    </div>
+                                                                    <% } %>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                                <% } %>
+    </div>
+
+    <%- include('../partials/footer') %>

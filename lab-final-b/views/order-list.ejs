@@ -1,0 +1,76 @@
+<%- include('partials/header') %>
+
+    <div class="container" style="padding: 120px 20px; min-height: 80vh;">
+        <h1 style="text-align: center; color: #f1b350; margin-bottom: 10px;">Order History</h1>
+        <p style="text-align: center; color: #ccc; margin-bottom: 40px;">Orders for: <span
+                style="color: white; font-weight: bold;">
+                <%= email %>
+            </span></p>
+
+        <div style="max-width: 1000px; margin: 0 auto;">
+            <% if (orders.length===0) { %>
+                <div style="text-align: center; padding: 40px; background: #1a1a1a; border-radius: 8px;">
+                    <h3 style="color: white;">No orders found.</h3>
+                    <p style="color: #999; margin-top: 10px;">We couldn't find any orders associated with this email.
+                    </p>
+                    <a href="/products" style="display: inline-block; margin-top: 20px; color: #f1b350;">Start Shopping
+                        &rarr;</a>
+                </div>
+                <% } else { %>
+                    <div style="overflow-x: auto;">
+                        <table
+                            style="width: 100%; border-collapse: collapse; background: #1a1a1a; border-radius: 8px; overflow: hidden; color: white;">
+                            <thead style="background: #222; text-transform: uppercase; font-size: 0.9rem;">
+                                <tr style="text-align: left; color: #f1b350;">
+                                    <th style="padding: 15px;">Order ID</th>
+                                    <th style="padding: 15px;">Date</th>
+                                    <th style="padding: 15px;">Items</th>
+                                    <th style="padding: 15px;">Status</th>
+                                    <th style="padding: 15px; text-align: right;">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% orders.forEach(order=> { %>
+                                    <tr style="border-bottom: 1px solid #333;">
+                                        <td style="padding: 15px; font-family: monospace; color: #999;">#<%=
+                                                order._id.toString().substring(order._id.toString().length - 6) %>
+                                        </td>
+                                        <td style="padding: 15px;">
+                                            <%= new Date(order.createdAt).toLocaleDateString() %>
+                                        </td>
+                                        <td style="padding: 15px;">
+                                            <% order.items.forEach(item=> { %>
+                                                <div style="font-size: 0.9rem; color: #ccc;">
+                                                    <%= item.qty %>x <%= item.name %>
+                                                </div>
+                                                <% }); %>
+                                        </td>
+                                        <td style="padding: 15px;">
+                                            <span style="
+                                        padding: 4px 8px; 
+                                        border-radius: 4px; 
+                                        font-size: 0.8rem;
+                                        background: <%= order.status === 'Placed' ? '#f39c1233' : (order.status === 'Delivered' ? '#2ecc7133' : '#3498db33') %>;
+                                        color: <%= order.status === 'Placed' ? '#f39c12' : (order.status === 'Delivered' ? '#2ecc71' : '#3498db') %>;
+                                    ">
+                                                <%= order.status %>
+                                            </span>
+                                        </td>
+                                        <td style="padding: 15px; text-align: right; font-weight: bold;">$<%=
+                                                order.total.toFixed(2) %>
+                                        </td>
+                                    </tr>
+                                    <% }); %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="/my-orders" style="color: #ccc; text-decoration: none; font-size: 0.9rem;">&larr;
+                            Check
+                            another email</a>
+                    </div>
+                    <% } %>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>

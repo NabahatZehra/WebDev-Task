@@ -1,0 +1,57 @@
+<%- include('partials/header') %>
+
+<div class="container" style="padding: 120px 20px; min-height: 80vh;">
+  <h1 style="text-align: center; color: #f1b350; margin-bottom: 40px;">Shopping Cart</h1>
+
+  <% if (!cart || cart.items.length === 0) { %>
+    <div style="text-align: center;">
+      <p style="font-size: 1.2rem; color: #fff;">Your cart is empty.</p>
+      <a href="/products" class="btn-primary" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background: #f1b350; color: #000; text-decoration: none; border-radius: 4px;">Continue Shopping</a>
+    </div>
+  <% } else { %>
+    <div style="max-width: 800px; margin: 0 auto; background: #1a1a1a; padding: 30px; border-radius: 8px;">
+      <table style="width: 100%; border-collapse: collapse; color: white;">
+        <thead>
+          <tr style="border-bottom: 1px solid #333;">
+            <th style="text-align: left; padding: 10px;">Product</th>
+            <th style="text-align: center; padding: 10px;">Price</th>
+            <th style="text-align: center; padding: 10px;">Quantity</th>
+            <th style="text-align: right; padding: 10px;">Total</th>
+            <th style="text-align: right; padding: 10px;">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% cart.items.forEach(item => { %>
+            <tr style="border-bottom: 1px solid #333;">
+              <td style="padding: 15px 10px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                  <img src="<%= item.image %>" alt="<%= item.name %>" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
+                  <span><%= item.name %></span>
+                </div>
+              </td>
+              <td style="text-align: center;">$<%= item.price %></td>
+              <td style="text-align: center;"><%= item.qty %></td>
+              <td style="text-align: right;">$<%= item.price * item.qty %></td>
+              <td style="text-align: right;">
+                <form action="/cart/remove" method="POST" style="display: inline;">
+                  <input type="hidden" name="productId" value="<%= item.productId %>">
+                  <button type="submit" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Remove</button>
+                </form>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+
+      <div style="margin-top: 30px; text-align: right; color: white;">
+        <h2 style="color: #f1b350;">Subtotal: $<%= cart.totalPrice %></h2>
+        <div style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+          <a href="/products" style="color: #fff; text-decoration: underline;">Continue Shopping</a>
+          <a href="/order/preview" class="btn-primary" style="display: inline-block; padding: 15px 30px; background: #f1b350; color: #000; text-decoration: none; border-radius: 4px; font-weight: bold; font-size: 1.1rem;">Proceed to Checkout →</a>
+        </div>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

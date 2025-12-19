@@ -1,0 +1,454 @@
+<%- include('partials/header', { title: product.name }) %>
+
+    <style>
+        .mainBox {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .breadcrumb {
+            padding: 15px 20px;
+            background: #1a1c1c;
+            border: 2px solid #333;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            color: #999;
+        }
+
+        .breadcrumb a {
+            color: #f9a825;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb a:hover {
+            color: #ffc107;
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            color: #ccc;
+        }
+
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            background: #1a1c1c;
+            border: 2px solid #333;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+        }
+
+        .product-detail-image {
+            position: relative;
+        }
+
+        .product-detail-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 3px solid #333;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .badge-featured {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #f9a825 0%, #ffc107 100%);
+            color: #0f1111;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 3px 10px rgba(249, 168, 37, 0.5);
+        }
+
+        .product-detail-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .product-category-badge {
+            display: inline-block;
+            background: rgba(249, 168, 37, 0.2);
+            color: #f9a825;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            width: fit-content;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2.5rem;
+            color: white;
+            margin: 0;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .product-price-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            border-top: 2px solid #333;
+            border-bottom: 2px solid #333;
+            background: rgba(249, 168, 37, 0.05);
+            border-radius: 8px;
+        }
+
+        .product-price {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2.5rem;
+            color: #f9a825;
+            font-weight: 700;
+        }
+
+        .product-stock {
+            font-size: 1rem;
+            color: #28a745;
+            font-weight: 600;
+            padding: 8px 15px;
+            background: rgba(40, 167, 69, 0.1);
+            border-radius: 20px;
+        }
+
+        .product-stock.out-of-stock {
+            color: #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+
+        .product-description {
+            background: #0f1111;
+            border: 2px solid #333;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .product-description h3 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1.3rem;
+            color: #f9a825;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-description p {
+            color: #ccc;
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin: 0;
+        }
+
+        .product-features {
+            background: #0f1111;
+            border: 2px solid #333;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .product-features h3 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 1.3rem;
+            color: #f9a825;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-features ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .product-features ul li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            color: #ccc;
+            font-size: 1rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .product-features ul li:last-child {
+            border-bottom: none;
+        }
+
+        .product-features ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #f9a825;
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .btn-book,
+        .btn-inquiry,
+        .btn-notify {
+            flex: 1;
+            padding: 16px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-book {
+            background: linear-gradient(135deg, #f9a825 0%, #ffc107 100%);
+            color: #0f1111;
+            border: 2px solid #f9a825;
+        }
+
+        .btn-book:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(249, 168, 37, 0.5);
+        }
+
+        .btn-inquiry {
+            background: #0f1111;
+            color: white;
+            border: 2px solid #333;
+        }
+
+        .btn-inquiry:hover {
+            background: #2a2c2c;
+            border-color: #f9a825;
+            transform: translateY(-3px);
+        }
+
+        .btn-notify {
+            background: #e74c3c;
+            color: white;
+            border: 2px solid #e74c3c;
+        }
+
+        .btn-notify:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.5);
+        }
+
+        .product-meta {
+            background: #0f1111;
+            border: 2px solid #333;
+            border-left: 4px solid #f9a825;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .product-meta p {
+            margin: 8px 0;
+            color: #999;
+            font-size: 0.95rem;
+        }
+
+        .product-meta strong {
+            color: #f9a825;
+            margin-right: 8px;
+        }
+
+        .back-button-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .btn-back {
+            display: inline-block;
+            padding: 14px 35px;
+            background: #0f1111;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 2px solid #333;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #f9a825;
+            color: #0f1111;
+            border-color: #f9a825;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(249, 168, 37, 0.5);
+        }
+
+        @media (max-width: 992px) {
+            .product-detail-container {
+                grid-template-columns: 1fr;
+            }
+
+            .product-title {
+                font-size: 2rem;
+            }
+
+            .product-price {
+                font-size: 2rem;
+            }
+
+            .product-actions {
+                flex-direction: column;
+            }
+
+            .btn-book,
+            .btn-inquiry,
+            .btn-notify {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mainBox {
+                padding: 15px;
+            }
+
+            .product-detail-container {
+                padding: 25px;
+                gap: 25px;
+            }
+
+            .product-title {
+                font-size: 1.7rem;
+            }
+
+            .product-price {
+                font-size: 1.8rem;
+            }
+
+            .breadcrumb {
+                font-size: 14px;
+            }
+        }
+    </style>
+
+    <main class="mainBox">
+
+        <div class="breadcrumb">
+            <a href="/">Home</a> /
+            <a href="/products">Services</a> /
+            <span>
+                <%= product.name %>
+            </span>
+        </div>
+
+        <div class="product-detail-container">
+
+            <div class="product-detail-image">
+                <img src="<%= product.image %>" alt="<%= product.name %>">
+                <% if (product.featured) { %>
+                    <span class="badge-featured">⭐ Featured</span>
+                    <% } %>
+            </div>
+
+            <div class="product-detail-info">
+                <span class="product-category-badge">
+                    <%= product.category %>
+                </span>
+
+                <h1 class="product-title">
+                    <%= product.name %>
+                </h1>
+
+                <div class="product-price-section">
+                    <span class="product-price">$<%= product.price.toFixed(2) %></span>
+                    <span class="product-stock <%= product.stock > 0 ? '' : 'out-of-stock' %>">
+                        <% if (product.stock> 0) { %>
+                            ✓ Available (<%= product.stock %> slots)
+                                <% } else { %>
+                                    ✗ Currently Unavailable
+                                    <% } %>
+                    </span>
+                </div>
+
+                <div class="product-description">
+                    <h3>📋 Description</h3>
+                    <p>
+                        <%= product.description %>
+                    </p>
+                </div>
+
+                <div class="product-features">
+                    <h3>✨ What's Included</h3>
+                    <ul>
+                        <li>Professional sound engineering</li>
+                        <li>High-quality studio equipment</li>
+                        <li>Expert consultation</li>
+                        <li>Post-production support</li>
+                    </ul>
+                </div>
+
+                <div class="product-actions">
+                    <% if (product.stock> 0) { %>
+                        <form action="/cart/add" method="POST" style="flex: 1;">
+                            <input type="hidden" name="productId" value="<%= product._id %>">
+                            <button type="submit" class="btn-book" style="width: 100%;">🛒 Add to Cart</button>
+                        </form>
+                        <button class="btn-inquiry" onclick="window.location.href='/cart'">View Cart</button>
+                        <% } else { %>
+                            <button class="btn-notify">🔔 Notify When Available</button>
+                            <% } %>
+                </div>
+
+                <div class="product-meta">
+                    <p><strong>Category:</strong>
+                        <%= product.category %>
+                    </p>
+                    <p><strong>Added:</strong>
+                        <%= new Date(product.createdAt).toLocaleDateString() %>
+                    </p>
+                    <p><strong>Product ID:</strong>
+                        <%= product._id %>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="back-button-section">
+            <a href="/products" class="btn-back">← Back to All Services</a>
+        </div>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+        <script>
+            // document.querySelector('.btn-book')?.addEventListener('click', () => {
+            //     alert('🎵 Booking functionality coming soon! Please contact us directly via the Contact page.');
+            // });
+
+            // document.querySelector('.btn-inquiry')?.addEventListener('click', () => {
+            //     window.location.href = '/contact';
+            // });
+
+            document.querySelector('.btn-notify')?.addEventListener('click', () => {
+                const productName = '<%= product.name %>';
+                alert(`🔔 Great! We'll notify you when "${productName}" becomes available. Check your email for updates!`);
+            });
+        </script>

@@ -1,0 +1,34 @@
+{
+  "name": "berecords-mongodb",
+  "version": "2.0.0",
+  "description": "BeRecords E-commerce with MongoDB - MVC Architecture",
+  "main": "backend/app.js",
+  "scripts": {
+    "start": "node backend/app.js",
+    "dev": "nodemon backend/app.js",
+    "seed": "node backend/seeds/seedProducts.js",
+    "old-server": "node server.js"
+  },
+  "keywords": [
+    "express",
+    "mongodb",
+    "mongoose",
+    "ecommerce",
+    "mvc"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^4.22.1",
+    "express-session": "^1.18.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^7.8.8"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

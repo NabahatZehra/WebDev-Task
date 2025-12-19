@@ -1,0 +1,120 @@
+<%- include('partials/header') %>
+
+    <div class="container" style="padding: 120px 20px; min-height: 80vh;">
+        <h1 style="text-align: center; color: #f1b350; margin-bottom: 40px;">Order Preview</h1>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto;">
+
+            <!-- Left Column: Order details and Form -->
+            <div style="background: #1a1a1a; padding: 30px; border-radius: 8px; color: white;">
+                <h2 style="color: #f1b350; border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 20px;">
+                    Customer Details</h2>
+
+                <form id="orderForm" action="/order/confirm" method="POST">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Full Name *</label>
+                        <input type="text" name="customerName" required
+                            style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #333; background: #333; color: white;">
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Email Address *</label>
+                        <input type="email" name="customerEmail" required
+                            style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #333; background: #333; color: white;">
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Phone Number *</label>
+                        <input type="tel" name="customerPhone" required
+                            style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #333; background: #333; color: white;">
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px;">Shipping Address *</label>
+                        <textarea name="customerAddress" required
+                            style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #333; background: #333; color: white; min-height: 100px;"></textarea>
+                    </div>
+
+                    <!--   <button type="submit" id="submitBtn" style="display: none;"></button> -->
+                </form>
+
+                <h2
+                    style="color: #f1b350; border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 20px; margin-top: 40px;">
+                    Order Items</h2>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 1px solid #333; color: #999;">
+                            <th style="text-align: left; padding: 10px;">Item</th>
+                            <th style="text-align: center; padding: 10px;">Qty</th>
+                            <th style="text-align: right; padding: 10px;">Price</th>
+                            <th style="text-align: right; padding: 10px;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% cart.items.forEach(item=> { %>
+                            <tr style="border-bottom: 1px solid #333;">
+                                <td style="padding: 10px;">
+                                    <%= item.name %>
+                                </td>
+                                <td style="text-align: center;">
+                                    <%= item.qty %>
+                                </td>
+                                <td style="text-align: right;">$<%= item.price %>
+                                </td>
+                                <td style="text-align: right;">$<%= item.price * item.qty %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Right Column: Summary -->
+            <div style="background: #1a1a1a; padding: 30px; border-radius: 8px; color: white; height: fit-content;">
+                <h2 style="color: #f1b350; border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 20px;">
+                    Order Summary</h2>
+
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                    <span>Subtotal:</span>
+                    <span>$<%= subtotal.toFixed(2) %></span>
+                </div>
+
+                <% if (discountPercent> 0) { %>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px; color: #28a745;">
+                        <span>Discount (<%= discountPercent %>%)</span>
+                        <span>-$<%= discountAmount.toFixed(2) %></span>
+                    </div>
+                    <% } %>
+
+                        <div
+                            style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 1px solid #333; font-weight: bold; font-size: 1.2rem; color: #f1b350;">
+                            <span>Grand Total:</span>
+                            <span>$<%= finalTotal.toFixed(2) %></span>
+                        </div>
+
+                        <!-- Discount Code Form (Task 2 Placeholder) -->
+                        <form action="/order/apply-discount" method="POST"
+                            style="margin-top: 30px; border-top: 1px solid #333; padding-top: 20px;">
+                            <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">Have a coupon?</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" name="couponCode" placeholder="Enter code"
+                                    style="flex: 1; padding: 8px; border-radius: 4px; border: 1px solid #333; background: #333; color: white;">
+                                <button type="submit"
+                                    style="padding: 8px 15px; background: #333; border: 1px solid #555; code: white; border-radius: 4px; cursor: pointer; color: white;">Apply</button>
+                            </div>
+                        </form>
+
+                        <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+                            <button onclick="document.getElementById('orderForm').submit()" class="btn-primary"
+                                style="width: 100%; padding: 15px; background: linear-gradient(135deg, #f9a825 0%, #ffc107 100%); color: #000; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 1.1rem;">Confirm
+                                Order</button>
+                            <a href="/cart"
+                                style="display: block; text-align: center; color: #ccc; text-decoration: none;">← Go
+                                Back to Cart</a>
+                        </div>
+            </div>
+
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>
